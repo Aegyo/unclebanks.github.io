@@ -18,7 +18,9 @@ jobs:
         run: git checkout -b release/${{ github.event.inputs.version }}
 
       - name: Build release files for Github Pages
-        run: npm run build:gh-pages
+        run: |
+          npm ci
+          npm run build:gh-pages
 
       # In order to make a commit, we need to initialize a user.
       - name: Initialize mandatory git config
