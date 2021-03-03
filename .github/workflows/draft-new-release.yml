@@ -22,17 +22,17 @@ jobs:
           npm ci
           npm run build:gh-pages
 
-      - name: Commit changelog and manifest files
-        id: make-commit
-        run: |
-          git add -A
-          git commit --message "Prepare release ${{ github.event.inputs.version }}"
-
       # In order to make a commit, we need to initialize a user.
       - name: Initialize mandatory git config
         run: |
           git config user.name "No Name Release Bot"
           git config user.email noreply@github.com
+
+      - name: Commit changelog and manifest files
+        id: make-commit
+        run: |
+          git add -A
+          git commit --message "Prepare release ${{ github.event.inputs.version }}"
 
       - name: Bump version in package.json
         run: npm version ${{ github.event.inputs.version }}
